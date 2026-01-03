@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Banking Portal | Demo</title>
+  <style>
+    :root{
+      --bg1:#ff7a3d;
+      --bg2:#0b214a;
+      --card:#f4f4f4;
+      --muted:#6b7280;
+      --text:#111827;
+      --accent:#ff7a3d;
+      --shadow: 0 18px 45px rgba(0,0,0,.22);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:#0a0f1e;
+    }
+
+    /* Top bar */
+    .topbar{
+      height:72px;
+      background:var(--bg1);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:#1f2a44;
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+    .mark{
+      width:44px;height:30px;border-radius:10px;
+      border:2px solid rgba(31,42,68,.35);
+      background:rgba(255,255,255,.25);
+    }
+    .contact{
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      font-size:18px;
+    }
+
+    /* Big clear simulation banner */
+    .banner{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:#111827;
+      color:#fff;
+      text-align:center;
+      padding:10px 14px;
+      font-weight:800;
+      letter-spacing:.4px;
+    }
+    .banner span{
+      color:#fbbf24;
+    }
+
+    /* Hero */
+    .hero{
+      min-height:calc(100vh - 72px);
+      background:
+        radial-gradient(900px 520px at 72% 55%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
+        linear-gradient(120deg, rgba(255,122,61,.92), rgba(11,33,74,.92));
+      display:flex;
+      align-items:flex-start;
+      padding:46px 42px;
+      gap:32px;
+    }
+
+    .card{
+      width:420px;
+      max-width:94vw;
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.55);
+      overflow:hidden;
+    }
+
+    .tabs{
+      display:flex;
+      padding:16px 18px 0 18px;
+      font-weight:800;
+      font-size:20px;
+      color:#b6b6b6;
+      gap:18px;
+    }
+    .tabs .active{
+      color:#6b7280;
+      position:relative;
+      padding-bottom:12px;
+    }
+    .tabs .active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:2px;
+      width:92px;
+      height:4px;
+      background:var(--accent);
+      border-radius:6px;
+    }
+
+    .content{ padding:18px 26px 22px 26px; }
+
+    h1{
+      margin:6px 0 10px 0;
+      font-size:34px;
+      line-height:1.1;
+      color:#0b2f6b;
+    }
+    .sub{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.35;
+      max-width:340px;
+    }
+
+    label{
+      display:block;
+      margin:12px 0 6px 0;
+      color:#666;
+      font-weight:800;
+    }
+    input{
+      width:100%;
+      height:44px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,.15);
+      background:#fff;
+      padding:0 12px;
+      font-size:16px;
+      outline:none;
+    }
+
+    .links{
+      display:flex;
+      justify-content:space-between;
+      margin:10px 0 14px 0;
+      font-weight:800;
+    }
+    .links a{
+      color:#6b7280;
+      text-decoration:underline;
+    }
+
+    button{
+      width:100%;
+      height:52px;
+      border:0;
+      border-radius:8px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:900;
+      font-size:18px;
+      letter-spacing:.5px;
+      cursor:pointer;
+    }
+
+    .right{
+      flex:1;
+      min-width:260px;
+      padding-top:26px;
+      color:#fff;
+      font-weight:950;
+      font-size:52px;
+      line-height:1.02;
+      text-shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:50;
+    }
+    .modal .box{
+      width:min(720px, 96vw);
+      background:#fff;
+      border-radius:18px;
+      padding:18px 18px 14px 18px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    }
+    .box h2{
+      margin:6px 0 10px 0;
+      color:#111827;
+    }
+    .box p{ margin:8px 0; color:#374151; line-height:1.5; }
+    .pill{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#fef3c7;
+      color:#92400e;
+      font-weight:900;
+      font-size:13px;
+    }
+    .close{
+      margin-top:12px;
+      background:#111827;
+    }
+
+    @media (max-width: 980px){
+      .hero{ flex-direction:column; padding:26px 16px; }
+      .right{ font-size:38px; padding-top:6px; }
+      .contact{ font-size:16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <span>PHISHING SIMULATION</span> | Training demo only | Do not enter real credentials
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        Demo Bank Portal<br/>
+        <small style="opacity:.8;font-weight:700;">Online Banking</small>
+      </div>
+    </div>
+    <a class="contact" href="#">Contact Us</a>
+  </header>
+
+  <main class="hero">
+    <section class="card" aria-label="Login Card">
+      <div class="tabs">
+        <div class="active">Login</div>
+        <div>Register</div>
+      </div>
+
+      <div class="content">
+        <h1>Welcome to<br/>Online Banking</h1>
+        <p class="sub">Manage your finances online, anytime and anywhere.</p>
+
+        <label for="user">Username</label>
+        <input id="user" type="text" placeholder="Username" autocomplete="off" />
+
+        <label for="pass">Password</label>
+        <input id="pass" type="password" placeholder="Password" autocomplete="off" />
+
+        <div class="links">
+          <a href="#">Forgot Password</a>
+          <a href="#">Security</a>
+        </div>
+
+        <button id="nextBtn" type="button">NEXT</button>
+        <p style="margin:12px 0 0 0;color:#6b7280;font-weight:700;font-size:13px;">
+          Tip: For your video, hover the link and show a suspicious domain mismatch.
+        </p>
+      </div>
+    </section>
+
+    <div class="right">
+      Better lives, together
+    </div>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="box">
+      <div class="pill">Training Demo</div>
+      <h2 id="mTitle">This was a phishing simulation.</h2>
+      <p><b>Nothing was sent anywhere.</b> This page is designed for awareness training.</p>
+      <p><b>Red flags to call out in your video:</b></p>
+      <ul style="color:#374151; line-height:1.6; margin-top:6px;">
+        <li>Urgent call-to-action and pressure to login quickly</li>
+        <li>Lookalike branding and a familiar layout</li>
+        <li>Link destination does not match the real organization</li>
+        <li>Request for credentials outside the normal login flow</li>
+      </ul>
+      <button class="close" id="closeBtn" type="button">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const nextBtn = document.getElementById('nextBtn');
+    const modal = document.getElementById('modal');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Important: do NOT collect or transmit data. This is a safe local demo only.
+    nextBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.getElementById('pass').value = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
