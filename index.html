@@ -1,315 +1,432 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Online Banking Portal | Demo</title>
-  <style>
-    :root{
-      --bg1:#ff7a3d;
-      --bg2:#0b214a;
-      --card:#f4f4f4;
-      --muted:#6b7280;
-      --text:#111827;
-      --accent:#ff7a3d;
-      --shadow: 0 18px 45px rgba(0,0,0,.22);
-      --radius: 22px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:#0a0f1e;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>i-Muamalat Replica</title>
+    <style>
+        :root {
+            --orange: #F47B3A;
+            --orange-deep: #EE6B2C;
+            --blue: #0B2F6B;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --card: #f4f4f4;
+            --white: #ffffff;
+            --shadow: 0 18px 45px rgba(0, 0, 0, .22);
+            --radius: 26px;
+            --tab-grey: #c7c7c7;
+            --border: #d7d7d7;
+        }
 
-    /* Top bar */
-    .topbar{
-      height:72px;
-      background:var(--bg1);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 22px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      color:#1f2a44;
-      font-weight:800;
-      letter-spacing:.3px;
-    }
-    .mark{
-      width:44px;height:30px;border-radius:10px;
-      border:2px solid rgba(31,42,68,.35);
-      background:rgba(255,255,255,.25);
-    }
-    .contact{
-      color:#fff;
-      font-weight:700;
-      text-decoration:none;
-      font-size:18px;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    /* Big clear simulation banner */
-    .banner{
-      position:sticky;
-      top:0;
-      z-index:10;
-      background:#111827;
-      color:#fff;
-      text-align:center;
-      padding:10px 14px;
-      font-weight:800;
-      letter-spacing:.4px;
-    }
-    .banner span{
-      color:#fbbf24;
-    }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background: #111;
+        }
 
-    /* Hero */
-    .hero{
-      min-height:calc(100vh - 72px);
-      background:
-        radial-gradient(900px 520px at 72% 55%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
-        linear-gradient(120deg, rgba(255,122,61,.92), rgba(11,33,74,.92));
-      display:flex;
-      align-items:flex-start;
-      padding:46px 42px;
-      gap:32px;
-    }
+        /* Top bar */
+        .topbar {
+            height: 72px;
+            background: var(--orange);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
 
-    .card{
-      width:420px;
-      max-width:94vw;
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,.55);
-      overflow:hidden;
-    }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            min-width: 280px;
+        }
 
-    .tabs{
-      display:flex;
-      padding:16px 18px 0 18px;
-      font-weight:800;
-      font-size:20px;
-      color:#b6b6b6;
-      gap:18px;
-    }
-    .tabs .active{
-      color:#6b7280;
-      position:relative;
-      padding-bottom:12px;
-    }
-    .tabs .active::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:2px;
-      width:92px;
-      height:4px;
-      background:var(--accent);
-      border-radius:6px;
-    }
+        .brand .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #143c7a;
+            font-weight: 700;
+        }
 
-    .content{ padding:18px 26px 22px 26px; }
+        /* Placeholder logo blocks (replace with <img>) */
+        .logoMark {
+            width: 54px;
+            height: 30px;
+            border: 2px solid rgba(20, 60, 122, .45);
+            border-radius: 8px;
+            opacity: .8;
+        }
 
-    h1{
-      margin:6px 0 10px 0;
-      font-size:34px;
-      line-height:1.1;
-      color:#0b2f6b;
-    }
-    .sub{
-      margin:0 0 18px 0;
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.35;
-      max-width:340px;
-    }
+        .brand small {
+            display: block;
+            font-weight: 600;
+            opacity: .85;
+        }
 
-    label{
-      display:block;
-      margin:12px 0 6px 0;
-      color:#666;
-      font-weight:800;
-    }
-    input{
-      width:100%;
-      height:44px;
-      border-radius:8px;
-      border:1px solid rgba(0,0,0,.15);
-      background:#fff;
-      padding:0 12px;
-      font-size:16px;
-      outline:none;
-    }
+        .contact {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 18px;
+        }
 
-    .links{
-      display:flex;
-      justify-content:space-between;
-      margin:10px 0 14px 0;
-      font-weight:800;
-    }
-    .links a{
-      color:#6b7280;
-      text-decoration:underline;
-    }
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: calc(100vh - 72px);
+            overflow: auto;
+            background:
+                radial-gradient(1200px 600px at 68% 58%, rgba(10, 33, 72, .18), rgba(10, 33, 72, 0) 60%),
+                linear-gradient(180deg, rgba(255, 255, 255, .0), rgba(0, 0, 0, .08)),
+                url("bg.jpg");
+            /* replace bg.jpg with your image */
+            background-size: cover;
+            background-position: center;
+        }
 
-    button{
-      width:100%;
-      height:52px;
-      border:0;
-      border-radius:8px;
-      background:var(--accent);
-      color:#fff;
-      font-weight:900;
-      font-size:18px;
-      letter-spacing:.5px;
-      cursor:pointer;
-    }
+        /* If you do not have the background image yet, remove url("bg.jpg") and keep gradients */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(244, 123, 58, .22), rgba(244, 123, 58, .05));
+            pointer-events: none;
+        }
 
-    .right{
-      flex:1;
-      min-width:260px;
-      padding-top:26px;
-      color:#fff;
-      font-weight:950;
-      font-size:52px;
-      line-height:1.02;
-      text-shadow: 0 10px 28px rgba(0,0,0,.35);
-    }
+        .layout {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            padding: 56px 48px;
+        }
 
-    /* Modal */
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:50;
-    }
-    .modal .box{
-      width:min(720px, 96vw);
-      background:#fff;
-      border-radius:18px;
-      padding:18px 18px 14px 18px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.35);
-    }
-    .box h2{
-      margin:6px 0 10px 0;
-      color:#111827;
-    }
-    .box p{ margin:8px 0; color:#374151; line-height:1.5; }
-    .pill{
-      display:inline-block;
-      padding:4px 10px;
-      border-radius:999px;
-      background:#fef3c7;
-      color:#92400e;
-      font-weight:900;
-      font-size:13px;
-    }
-    .close{
-      margin-top:12px;
-      background:#111827;
-    }
+        /* Login card */
+        .card {
+            width: 420px;
+            max-width: 92vw;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .55);
+        }
 
-    @media (max-width: 980px){
-      .hero{ flex-direction:column; padding:26px 16px; }
-      .right{ font-size:38px; padding-top:6px; }
-      .contact{ font-size:16px; }
-    }
-  </style>
+        .tabs {
+            display: flex;
+            gap: 0;
+            padding: 18px 18px 0 18px;
+            font-weight: 700;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: left;
+            padding: 14px 18px 12px 18px;
+            color: var(--tab-grey);
+            position: relative;
+            cursor: default;
+            user-select: none;
+            font-size: 20px;
+        }
+
+        .tab.active {
+            color: #6a6a6a;
+        }
+
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            left: 18px;
+            right: 42%;
+            bottom: -2px;
+            height: 4px;
+            background: var(--orange-deep);
+            border-radius: 4px;
+        }
+
+        .content {
+            padding: 18px 26px 22px 26px;
+        }
+
+        h1 {
+            margin: 6px 0 10px 0;
+            font-size: 34px;
+            line-height: 1.08;
+            color: var(--blue);
+            letter-spacing: .2px;
+        }
+
+        .subtitle {
+            margin: 0 0 22px 0;
+            color: #676767;
+            font-size: 18px;
+            line-height: 1.3;
+            max-width: 320px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            color: #666;
+            margin: 10px 0 6px 0;
+            font-size: 16px;
+        }
+
+        .input {
+            width: 100%;
+            height: 44px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #fff;
+            padding: 0 14px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .rowLinks {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0 14px 0;
+            font-weight: 700;
+        }
+
+        .rowLinks a {
+            color: #6a6a6a;
+            text-decoration: underline;
+            font-size: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 6px;
+            background: var(--orange);
+            color: #fff;
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: .5px;
+            cursor: pointer;
+            box-shadow: 0 10px 18px rgba(244, 123, 58, .25);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .quick {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-top: 18px;
+            border-top: 1px solid rgba(0, 0, 0, .08);
+            padding-top: 18px;
+        }
+
+        .quickItem {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 8px;
+        }
+
+        .ico {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 2px solid rgba(244, 123, 58, .65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--orange-deep);
+            font-weight: 900;
+            background: rgba(255, 255, 255, .6);
+        }
+
+        .quickText {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+
+        .quickText b {
+            color: var(--blue);
+            font-size: 18px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--orange-deep);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            border-radius: 999px;
+            padding: 3px 8px;
+            margin-left: 8px;
+            transform: translateY(-1px);
+        }
+
+        /* Right side headline overlay (optional) */
+        .headline {
+            margin-left: auto;
+            max-width: 720px;
+            padding-top: 34px;
+            padding-right: 14px;
+            color: #fff;
+            font-weight: 900;
+            font-size: 54px;
+            line-height: 1.02;
+            text-shadow: 0 10px 28px rgba(0, 0, 0, .35);
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .layout {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 28px 18px;
+            }
+
+            .headline {
+                font-size: 40px;
+                padding-top: 10px;
+                margin-left: 0;
+                max-width: 92vw;
+            }
+
+            .topbar {
+                padding: 0 14px;
+            }
+
+            .brand {
+                gap: 12px;
+                min-width: auto;
+            }
+
+            .contact {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="banner">
-    <span>PHISHING SIMULATION</span> | Training demo only | Do not enter real credentials
-  </div>
+    <header class="topbar">
+        <div class="brand">
+            <!-- Replace these placeholders with your actual logos -->
+            <div class="logo">
+                <div class="logoMark"></div>
+                <div>
+                    Bank Muamalat<br />
+                    <small>Better lives, together</small>
+                </div>
+            </div>
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="mark" aria-hidden="true"></div>
-      <div>
-        Demo Bank Portal<br/>
-        <small style="opacity:.8;font-weight:700;">Online Banking</small>
-      </div>
-    </div>
-    <a class="contact" href="#">Contact Us</a>
-  </header>
-
-  <main class="hero">
-    <section class="card" aria-label="Login Card">
-      <div class="tabs">
-        <div class="active">Login</div>
-        <div>Register</div>
-      </div>
-
-      <div class="content">
-        <h1>Welcome to<br/>Online Banking</h1>
-        <p class="sub">Manage your finances online, anytime and anywhere.</p>
-
-        <label for="user">Username</label>
-        <input id="user" type="text" placeholder="Username" autocomplete="off" />
-
-        <label for="pass">Password</label>
-        <input id="pass" type="password" placeholder="Password" autocomplete="off" />
-
-        <div class="links">
-          <a href="#">Forgot Password</a>
-          <a href="#">Security</a>
+            <div class="logo">
+                <div class="logoMark" style="width:34px"></div>
+                <div>
+                    i-muamalat<br />
+                    <small>online portal</small>
+                </div>
+            </div>
         </div>
 
-        <button id="nextBtn" type="button">NEXT</button>
-        <p style="margin:12px 0 0 0;color:#6b7280;font-weight:700;font-size:13px;">
-          Tip: For your video, hover the link and show a suspicious domain mismatch.
-        </p>
-      </div>
-    </section>
+        <a class="contact" href="#">Contact Us</a>
+    </header>
 
-    <div class="right">
-      Better lives, together
-    </div>
-  </main>
+    <main class="hero">
+        <div class="layout">
+            <section class="card" aria-label="Login Card">
+                <div class="tabs">
+                    <div class="tab active">Login</div>
+                    <div class="tab">Register</div>
+                </div>
 
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <div class="box">
-      <div class="pill">Training Demo</div>
-      <h2 id="mTitle">This was a phishing simulation.</h2>
-      <p><b>Nothing was sent anywhere.</b> This page is designed for awareness training.</p>
-      <p><b>Red flags to call out in your video:</b></p>
-      <ul style="color:#374151; line-height:1.6; margin-top:6px;">
-        <li>Urgent call-to-action and pressure to login quickly</li>
-        <li>Lookalike branding and a familiar layout</li>
-        <li>Link destination does not match the real organization</li>
-        <li>Request for credentials outside the normal login flow</li>
-      </ul>
-      <button class="close" id="closeBtn" type="button">Close</button>
-    </div>
-  </div>
+                <div class="content">
+                    <h1>Welcome to<br />i-Muamalat<br />Internet Banking</h1>
+                    <p class="subtitle">Manage your finances online,<br />anytime &amp; anywhere</p>
 
-  <script>
-    const nextBtn = document.getElementById('nextBtn');
-    const modal = document.getElementById('modal');
-    const closeBtn = document.getElementById('closeBtn');
+                    <label for="username">Username</label>
+                    <input class="input" id="username" type="text" placeholder="Username" />
 
-    // Important: do NOT collect or transmit data. This is a safe local demo only.
-    nextBtn.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
+                    <label for="password">Password</label>
+                    <input class="input" id="password" type="password" placeholder="Password" />
 
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.getElementById('pass').value = '';
-    });
+                    <div class="rowLinks">
+                        <a href="#">Forgot Password</a>
+                        <a href="#">Kill Switch</a>
+                    </div>
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-  </script>
+                    <button id="nextBtn" class="btn" type="button">NEXT</button>
+
+                    <div class="quick">
+                        <div class="quickItem">
+                            <div class="ico">🔒</div>
+                            <div class="quickText">
+                                <b>Security Alert</b>
+                            </div>
+                        </div>
+
+                        <div class="quickItem">
+                            <div class="ico">📣</div>
+                            <div class="quickText">
+                                <div>
+                                    <b>Announcements</b>
+                                    <span class="badge">NEW</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="headline">
+                Better lives, together
+            </div>
+        </div>
+    </main>
+    <script>
+        (function () {
+            const next = document.getElementById('nextBtn');
+            if (!next) return;
+            next.addEventListener('click', function () {
+                const username = document.getElementById('username');
+                const password = document.getElementById('password');
+                const u = username ? username.value.trim() : '';
+                const p = password ? password.value : '';
+                if (!u) { if (username) username.focus(); alert('Please enter your username'); return; }
+                if (!p) { if (password) password.focus(); alert('Please enter your password'); return; }
+
+                const content = next.closest('.content');
+                if (!content) return;
+                content.innerHTML = '';
+
+                const h1 = document.createElement('h1');
+                h1.textContent = 'Processing...';
+                const pEl = document.createElement('p');
+                pEl.className = 'subtitle';
+                pEl.textContent = 'Logging in as ' + u + ' — redirecting.';
+
+                content.appendChild(h1);
+                content.appendChild(pEl);
+            });
+        })();
+    </script>
+
 </body>
+
 </html>
